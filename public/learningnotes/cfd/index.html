@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="ChuangKit">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="作为计算流体力学的教科书，约翰D.安德森（John D.Anderson）教授的这本《计算流体力学基础及其应用》在世界范围内得到了广泛的认可。计算流体力学自20世纪60年代以来发展迅速，目前已广泛应用于航空航天、能源和动力工程、力学、物理和化学、建筑、水利、海洋、大气、环境、灾害预防、冶金等领域。越来越多的科研和工程技术人员希望能够了解和掌握计算流体力学知识。因此我们相信，本书中文版的问世，将会对读者正确理解和掌握计算流体力学的知识有所帮助，同时也将对国内计算流体力学的教学和科研工作起到推动作用。">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/learningnotes/cfd/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#EF525B">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono|Lora:400,700|Roboto:400,700&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.9ae2dcbfaf086b03655442ec6e1550ba.css">
+
+  
+
+  
+  
+  
+
+  
+  <link rel="alternate" href="/learningnotes/cfd/index.xml" type="application/rss+xml" title="ChuangKit">
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/learningnotes/cfd/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="ChuangKit">
+  <meta property="og:url" content="/learningnotes/cfd/">
+  <meta property="og:title" content="前言 | ChuangKit">
+  <meta property="og:description" content="作为计算流体力学的教科书，约翰D.安德森（John D.Anderson）教授的这本《计算流体力学基础及其应用》在世界范围内得到了广泛的认可。计算流体力学自20世纪60年代以来发展迅速，目前已广泛应用于航空航天、能源和动力工程、力学、物理和化学、建筑、水利、海洋、大气、环境、灾害预防、冶金等领域。越来越多的科研和工程技术人员希望能够了解和掌握计算流体力学知识。因此我们相信，本书中文版的问世，将会对读者正确理解和掌握计算流体力学的知识有所帮助，同时也将对国内计算流体力学的教学和科研工作起到推动作用。"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    <meta property="og:updated_time" content="2019-09-06T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>前言 | ChuangKit</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">ChuangKit</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>主页</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/learningnotes/"><span>学习笔记</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/slides/"><span>幻灯片</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/learningnotes/cfd/">前言</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/learningnotes/cfd/chapter1/">卷1 基本思想和方程</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter1/">1 计算流体力学的基本原理</a>
+      </li>
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter2/">2 计算流体力学的控制方程</a>
+      </li>
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter3/">3 偏微分方程的数学性质对CFD的影响</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/learningnotes/cfd/chapter4/">卷2 基本的数值方法</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter4/">4 离散化的基本方法</a>
+      </li>
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter5/">5 网格生成与坐标变换</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">前言</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            <p>作为计算流体力学的教科书，约翰D.安德森（John D.Anderson）教授的这本《计算流体力学基础及其应用》在世界范围内得到了广泛的认可。计算流体力学自20世纪60年代以来发展迅速，目前已广泛应用于航空航天、能源和动力工程、力学、物理和化学、建筑、水利、海洋、大气、环境、灾害预防、冶金等领域。越来越多的科研和工程技术人员希望能够了解和掌握计算流体力学知识。因此我们相信，本书中文版的问世，将会对读者正确理解和掌握计算流体力学的知识有所帮助，同时也将对国内计算流体力学的教学和科研工作起到推动作用。
+《计算流体力学基础及其应用》一书亦是为不同领域中那些以前从来没有接触过计算流体力学，或者从来没在计算流体力学领域工作过的科研、工程技术人员和各类初学者编写的一本参考书。读者在阅读计算流体力学的其他教科书和现有文献之前，本书应该成为首先学习和掌握的第一本书。
+本书作者约翰D.安德森（John D.Anderson）教授是一位特别注重解决工程实际问题的计算流体力学专家，具有多年讲授计算流体力学课程和各种短期培训课程的经验。本书的特点是简单实用，只需要读者具有相当于工程类或理科大学本科高年级学生水平的数学和流体力学知识。本书通篇贯穿了理论联系实际、注重工程应用的思想。作者试图用通俗易懂的语言、生动形象的图表等方式引导读者从基本的术语和概念出发，逐步了解和掌握计算流体力学的基本原理、基本方法和应用技巧。
+本书分为4部分，共12章，几乎涉及了计算流体力学的所有方面，内容非常广泛。第1部分（1-3章）介绍与计算流体力学相关的基本思路和体系，同时对流体力学的控制方程进行了广泛的探讨。第2部分（4~6章）主要介绍控制方程数值离散的基本内容和求解流动问题常用的数值方法。第3部分（7~10章）介绍计算流体力学的具体应用。第4部分（11~12章）着重介绍了现代计算流体力学的前沿课题和未来的发展趋势。读者可以从本书中系统地学到计算流体力学各个方面的基本知识，为今后进一步学习和研究计算流体力学打下良好的理论基础。
+本书的编排围绕基本知识、主要方法和应用技巧这一主线展开，包括基本原理和方程、数值分析基础、应用实例和现代计算流体力学概述，根据内容本身的内在联系划分章节，由浅入深，逻辑性强，推理缜密。作为大学教材，本书的内容编排非常符合循序渐进的学习规律，适用于力学专业高年级本科生和非力学专业研究生的计算流体力学课程。同时，对那些期望在短期内了解和掌握计算流体力学基础知识的初学者来说，本书也是一本非常好的入门参考书。
+鉴于阅读此书中文版的读者，特别是初学者，要查找、引用原书的参考文献并非易事。为此，我们在翻译本书时，删除了原书的参考文献及文中提及参考文献的相关内容。
+本书的第1-4章、第8-12章由北京航空航天大学吴颂平教授翻译，第5~7章由北京工业大学刘赵淼教授翻译。他（她）们的研究生王浩、刘勇、谢锦睿、李斌、廖洪、刘华敏、相倩、孙潜等参加了部分翻译工作，在此向这些研究生表示感谢。全书由吴颂平教授整理、统稿。
+由于时间仓促和译者水平所限，书中难免有不妥和错误之处，敬请批评指正</p>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Sep 6, 2019</p>
+
+          
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/learningnotes/cfd/</loc>
+    <lastmod>2019-09-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/learningnotes/cfd/chapter1/</loc>
+    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/learningnotes/cfd/chapter2/</loc>
+    <lastmod>2019-08-06T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/learningnotes/cfd/chapter3/</loc>
+    <lastmod>2019-08-06T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/learningnotes/cfd/chapter4/</loc>
+    <lastmod>2019-08-06T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/learningnotes/cfd/chapter5/</loc>
+    <lastmod>2019-08-06T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/demo/</loc>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-08-06T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/slides/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/slides/example/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/admin/</loc>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>/post/nocss/</loc>
+  </url>
+  
+  <url>
+    <loc>/publication_types/</loc>
+  </url>
+  
+  <url>
+    <loc>/publication/</loc>
+  </url>
+  
+  <url>
+    <loc>/talk/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+  </url>
+  
+  <url>
+    <loc>/learningnotes/</loc>
+  </url>
+  
+</urlset>

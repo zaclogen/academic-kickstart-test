@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="ChuangKit">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="5.1 引言  网格: 分布在整个流场内的离散点 标准的有限差分法需要均匀网格 贴体坐标系$\xi$和$\eta$(在物体表面生成坐标线)  流动控制方程在计算平面里用有限差分方法求解, 计算得到的信息将利用网格点之间的一一对应直接带回到物理平面. 因此需将物理平面的控制方程变换到计算平面表示的物理方程.  5.2 方程的一般变换 考虑二维非定常流场, 自变量为$x, y, t$, 将物理平面自变量$(x,y,t)$变换成计算平面中的一组新自变量$(\xi, \eta, \tau)$,用下述三个方程表示这个变换:
+$$\xi = \xi (x, y, t)$$ $$\eta = \eta (x, y, t)$$ $$\tau = \tau (t)$$ 注: 目前这个变换是以一般形式写出的, 对于实际应用, 该变换必须由具体的解析关系式给出, 有时也可以由特定的数值对应关系式给出.通常$\tau = t$.
+ 考虑以x, y和t为自变量的一个或一组偏微分方程, 如连续性方程,动量方程和能量方程. 这些方程中未知数是以导数形式出现的, 如$\frac{\partial \rho}{\partial x}$, $\frac{\partial u}{\partial y}$, $\frac{\partial e}{\partial t}$等. 因此, 要将方程由$(x, y, t)$空间变换到$(\xi, \eta, \tau)$空间,需要对导数进行变换, 即把关于x, y, t的导数变换成关于$\xi, \eta, \tau$的导数. 比如用$\frac{\partial u}{\partial \xi}$和$\frac{\partial u}{\partial \eta}$等的某种组合来代替$\frac{\partial u}{\partial y}$.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/learningnotes/cfd/chapter5/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#EF525B">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono|Lora:400,700|Roboto:400,700&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.9ae2dcbfaf086b03655442ec6e1550ba.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/learningnotes/cfd/chapter5/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="ChuangKit">
+  <meta property="og:url" content="/learningnotes/cfd/chapter5/">
+  <meta property="og:title" content="第5章 网格生成与坐标变换 | ChuangKit">
+  <meta property="og:description" content="5.1 引言  网格: 分布在整个流场内的离散点 标准的有限差分法需要均匀网格 贴体坐标系$\xi$和$\eta$(在物体表面生成坐标线)  流动控制方程在计算平面里用有限差分方法求解, 计算得到的信息将利用网格点之间的一一对应直接带回到物理平面. 因此需将物理平面的控制方程变换到计算平面表示的物理方程.  5.2 方程的一般变换 考虑二维非定常流场, 自变量为$x, y, t$, 将物理平面自变量$(x,y,t)$变换成计算平面中的一组新自变量$(\xi, \eta, \tau)$,用下述三个方程表示这个变换:
+$$\xi = \xi (x, y, t)$$ $$\eta = \eta (x, y, t)$$ $$\tau = \tau (t)$$ 注: 目前这个变换是以一般形式写出的, 对于实际应用, 该变换必须由具体的解析关系式给出, 有时也可以由特定的数值对应关系式给出.通常$\tau = t$.
+ 考虑以x, y和t为自变量的一个或一组偏微分方程, 如连续性方程,动量方程和能量方程. 这些方程中未知数是以导数形式出现的, 如$\frac{\partial \rho}{\partial x}$, $\frac{\partial u}{\partial y}$, $\frac{\partial e}{\partial t}$等. 因此, 要将方程由$(x, y, t)$空间变换到$(\xi, \eta, \tau)$空间,需要对导数进行变换, 即把关于x, y, t的导数变换成关于$\xi, \eta, \tau$的导数. 比如用$\frac{\partial u}{\partial \xi}$和$\frac{\partial u}{\partial \eta}$等的某种组合来代替$\frac{\partial u}{\partial y}$."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-08-06T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-08-06T00:00:00&#43;01:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>第5章 网格生成与坐标变换 | ChuangKit</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">ChuangKit</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>主页</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/learningnotes/"><span>学习笔记</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/slides/"><span>幻灯片</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/learningnotes/cfd/">前言</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/learningnotes/cfd/chapter1/">卷1 基本思想和方程</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter1/">1 计算流体力学的基本原理</a>
+      </li>
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter2/">2 计算流体力学的控制方程</a>
+      </li>
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter3/">3 偏微分方程的数学性质对CFD的影响</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/learningnotes/cfd/chapter4/">卷2 基本的数值方法</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter4/">4 离散化的基本方法</a>
+      </li>
+      
+      <li class="active">
+        <a href="/learningnotes/cfd/chapter5/">5 网格生成与坐标变换</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+<ul>
+<li><a href="#5-1-引言">5.1 引言</a></li>
+<li><a href="#5-2-方程的一般变换">5.2 方程的一般变换</a></li>
+<li><a href="#5-3-度量和雅可比行列式">5.3 度量和雅可比行列式</a></li>
+</ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">第5章 网格生成与坐标变换</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            
+
+<h1 id="5-1-引言">5.1 引言</h1>
+
+<ul>
+<li>网格: 分布在整个流场内的离散点</li>
+<li>标准的有限差分法需要均匀网格</li>
+<li>贴体坐标系$\xi$和$\eta$(在物体表面生成坐标线)</li>
+<li><img src="https://i.imgur.com/V7loUPI.png" alt="物理平面与计算平面" /></li>
+<li>流动控制方程在计算平面里用有限差分方法求解, 计算得到的信息将利用网格点之间的一一对应直接带回到物理平面. 因此需将物理平面的控制方程变换到计算平面表示的物理方程.</li>
+</ul>
+
+<h1 id="5-2-方程的一般变换">5.2 方程的一般变换</h1>
+
+<p>考虑二维非定常流场, 自变量为$x, y, t$, 将物理平面自变量$(x,y,t)$变换成计算平面中的一组新自变量$(\xi, \eta, \tau)$,用下述三个方程表示这个变换:</p>
+
+<p>$$\xi = \xi (x, y, t)$$
+$$\eta = \eta (x, y, t)$$
+$$\tau = \tau (t)$$
+注: 目前这个变换是以一般形式写出的, 对于实际应用, 该变换必须由具体的解析关系式给出, 有时也可以由特定的数值对应关系式给出.通常$\tau = t$.</p>
+
+<ul>
+<li>考虑以x, y和t为自变量的一个或一组偏微分方程, 如连续性方程,动量方程和能量方程. 这些方程中<strong>未知数是以导数形式出现的</strong>, 如$\frac{\partial \rho}{\partial x}$, $\frac{\partial u}{\partial y}$, $\frac{\partial e}{\partial t}$等.</li>
+<li>因此, 要将方程由$(x, y, t)$空间变换到$(\xi, \eta, \tau)$空间,需要对导数进行变换, 即把关于x, y, t的导数变换成关于$\xi, \eta, \tau$的导数. 比如用$\frac{\partial u}{\partial \xi}$和$\frac{\partial u}{\partial \eta}$等的某种组合来代替$\frac{\partial u}{\partial y}$.</li>
+<li>根据<strong>求导链式法则</strong><a href="https://zh.wikipedia.org/wiki/%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99" target="_blank">wiki链式法则</a></li>
+</ul>
+
+<p>$$\left(\frac{\partial}{\partial x}\right)<em>{y, t}=\left(\frac{\partial}{\partial \xi}\right)</em>{\eta, \tau}\left(\frac{\partial \xi}{\partial x}\right)<em>{y, t}+\left(\frac{\partial}{\partial \eta}\right)</em>{\xi, \tau}\left(\frac{\partial \eta}{\partial x}\right)<em>{y, t}+\left(\frac{\partial}{\partial \tau}\right)</em>{\xi, \eta}\left(\frac{\partial \tau}{\partial x}\right)_{y, t}$$</p>
+
+<p>$$\left(\frac{\partial}{\partial x}\right)<em>{y, t}=\left(\frac{\partial}{\partial \xi}\right)</em>{\eta, \tau}\left(\frac{\partial \xi}{\partial x}\right)<em>{y, t}+\left(\frac{\partial}{\partial \eta}\right)</em>{\xi, \tau}\left(\frac{\partial \eta}{\partial x}\right)<em>{y, t}+\left(\frac{\partial}{\partial \tau}\right)</em>{\xi, \eta}\left(\frac{\partial \tau}{\partial x}\right)<em>{y, t}$$
+$$\left(\frac{\partial}{\partial t}\right)</em>{x, y}=\left(\frac{\partial}{\partial \xi}\right)<em>{\eta, \tau}\left(\frac{\partial \xi}{\partial t}\right)</em>{x, y}+\left(\frac{\partial}{\partial \eta}\right)<em>{\xi, \tau}\left(\frac{\partial \eta}{\partial t}\right)</em>{x, y}+\left(\frac{\partial}{\partial \tau}\right)<em>{\xi, \eta}\left(\frac{\partial \tau}{\partial t}\right)</em>{x, y}$$
+注: 表达式中下标是为了强调求偏导数的过程中哪些变量保持不变.
+考虑$\tau = \tau(t)$, 得到(5-2~4):</p>
+
+<p>$$\frac{\partial}{\partial x}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial x}\right)$$
+$$\frac{\partial}{\partial y}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial y}\right)$$
+$$\frac{\partial}{\partial t}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial t}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial t}\right)+\left(\frac{\partial}{\partial \tau}\right)\left(\frac{\mathrm{d} \tau}{\mathrm{d} t}\right)$$
+- 可将流动控制方程中关于x, y, t的导数对应代替. 关于$\xi, \eta, \tau$的导数中的系数称为<strong>度量</strong>, 如$\frac{\partial \xi}{\partial x}$, $\frac{\partial \xi}{\partial y}$, $\frac{\partial \eta}{\partial x}$和$\frac{\partial \eta}{\partial y}$都是度量, 如果(5-1)是封闭形式的解析表达式, 那么度量也可以求出封闭形式的表达式.然而, (5-1)给出的变换常常只是纯数值的对应关系, 此时只能用有限差分来计算度量, 通常是用中心差分计算.
+- 考虑粘性流动控制方程, 方程的粘性项包含二阶导数, 如$\frac{\mu \frac{\partial v}{\partial x}}{\partial x}$, 因此对二阶导数也要进行变换.
+- 令 :</p>
+
+<p>$$A = \frac{\partial}{\partial x}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial x}\right)$$
+$$D=\frac{\partial}{\partial y}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial y}\right)$$</p>
+
+<ul>
+<li>则有:</li>
+<li>(5-6)</li>
+</ul>
+
+<p>$$\begin{aligned} \frac{\partial^{2}}{\partial x^{2}} &amp;=\frac{\partial A}{\partial x}=\frac{\partial}{\partial x}\left[\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial x}\right)\right] \\ &amp;=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial x^{2}}\right)+\left(\frac{\partial \xi}{\partial x}\right)\left(\frac{\partial^{2}}{\partial x \partial \xi}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial x^{2}}\right)+\left(\frac{\partial \eta}{\partial x}\right)\left(\frac{\partial^{2}}{\partial x \partial \eta}\right) \end{aligned}$$</p>
+
+<ul>
+<li>(5-10)<br /></li>
+</ul>
+
+<p>$$
+\begin{aligned} \frac{\partial^{2}}{\partial y^{2}} &amp;=\frac{\partial D}{\partial y}=\frac{\partial}{\partial y}\left[\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial y}\right)\right] \\ &amp;=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial y^{2}}\right)+\left(\frac{\partial \xi}{\partial y}\right)\left(\frac{\partial^{2}}{\partial \xi \partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial y^{2}}\right)+\left(\frac{\partial \eta}{\partial y}\right)\left(\frac{\partial^{2}}{\partial \eta \partial y}\right) \end{aligned}
+$$
+- (5-14)</p>
+
+<p>$$
+\begin{aligned} \frac{\partial^{2}}{\partial x \partial y} &amp;=\frac{\partial}{\partial x}\left(\frac{\partial}{\partial y}\right)=\frac{\partial D}{\partial x}=\frac{\partial}{\partial x}\left[\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial y}\right)\right] \\ &amp;=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial x \partial y}\right)+\left(\frac{\partial \xi}{\partial y}\right)\left(\frac{\partial^{2}}{\partial \xi \partial x}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial x \partial y}\right)+\left(\frac{\partial \eta}{\partial y}\right)\left(\frac{\partial^{2}}{\partial \eta \partial x}\right) \end{aligned}
+$$
+- 含有&rdquo;复合导数&rdquo;, 继续运用(5-2~3)&ldquo;锁链规则&rdquo;, 记&rdquo;复合导数&rdquo;为:</p>
+
+<ul>
+<li>(5-7)</li>
+</ul>
+
+<p>$$B=\frac{\partial^{2}}{\partial x \partial \xi}=\frac{\partial}{\partial x}\left(\frac{\partial}{\partial \xi}\right)= \left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \eta}{\partial x}\right)$$
+  - (5-8)</p>
+
+<p>$$
+C=\frac{\partial^{2}}{\partial x \partial \eta}=\frac{\partial}{\partial x}\left(\frac{\partial}{\partial \eta}\right)=\left(\frac{\partial^{2}}{\partial \xi \partial \eta}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial x}\right)
+$$
+- (5-11)</p>
+
+<p>$$
+E=\frac{\partial}{\partial y}\left(\frac{\partial}{\partial \xi}\right)=\left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \eta}{\partial y}\right)
+$$
+  - (5-12)</p>
+
+<p>$$
+F=\frac{\partial}{\partial y}\left(\frac{\partial}{\partial \eta}\right)=\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial y}\right)
+$$
+- 将B,C,E,F代回, 得二阶导数变换:
+- (5-9)</p>
+
+<p>$$
+\begin{aligned} \frac{\partial^{2}}{\partial x^{2}}=&amp;\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial x^{2}}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial x^{2}}\right)+\left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial x}\right)^{2}+\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial x}\right)^{2}+\\ &amp; 2\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \eta}{\partial x}\right)\left(\frac{\partial \xi}{\partial x}\right) \end{aligned}
+$$
+- (5-13)</p>
+
+<p>$$
+\begin{aligned} \frac{\partial^{2}}{\partial y^{2}}=&amp;\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial y^{2}}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial y^{2}}\right)+\left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial y}\right)^{2}+\\ &amp;\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial y}\right)^{2}+2\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \eta}{\partial y}\right)\left(\frac{\partial \xi}{\partial y}\right) \end{aligned}
+$$
+- (5-15)</p>
+
+<p>$$
+\begin{aligned} \frac{\partial^{2}}{\partial x \partial y}=&amp;\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial x \partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial x \partial y}\right)+\left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial x}\right)\left(\frac{\partial \xi}{\partial y}\right)+\\ &amp;\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial x}\right)\left(\frac{\partial \eta}{\partial y}\right)+\left(\frac{\partial^{2}}{\partial \xi \partial \eta}\right)\left[\left(\frac{\partial \eta}{\partial x}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial \xi}{\partial x}\right)\left(\frac{\partial \eta}{\partial y}\right)\right] \end{aligned}
+$$
+当流动控制方程用强守恒形式（2-93）表示时，二阶导数的变换，即式（5-9）、式（5-13）和式（5-15）各式就用不到了。回到2.10节，看看方程（2-93）以及式中的列向量的定义式（2-94）到式（2-98）。注意到，由式（2-95）到式（2-97）表示的F、G和H中，粘性项直接以$\tau<em>{xx}, \tau</em>{xy}, k\frac{\partial T}{\partial x}$等形式出现。这些项只包括速度分量的一阶导数（如$\frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}$）或温度的一阶导数。对F,G和H内部的这些项进行变换时，只需用到一阶导数的变换式（5-2）和式（5-3）。接下来，方程（2-93）本身出现的一阶导数也是通过式（5-2）、式（5-3）、式（5-5）各式进行变换的。因此，当流动控制方程用式（2-93）的形式表示时，两次运用一阶导数的变换，也就是两次使用式（5-2）、式（5-3）和式（5-5），就可以完成方程的变换。相比之下，用式（2-58a~c）表示的控制方程，粘性项里直接出现了二阶导数。对于这种形式的控制方程进行变换，即要用到式（5-2）、式（5-3）、式（5-5）等一阶导数的变换，也要用到式（5-9）、式（5-13）、式（5-15）等二阶导数的变换。
+再次强调，式（5-1）到式（5-3）、式（5-5）、式（5-9）、式（5-13）和式（5-15）各式，是用来将流动控制方程从物理平面（$（x，y）$平面）变换到计算平面$(\xi, \eta)$平面）的。在大多数CFD应用中，这种变换的目的是将物理平面中的非均匀网格（图5-2a）变换成计算平面中的均匀网格（图5-2b）。变换后的偏微分控制方程就在计算平面上进行有限差分离散。而在计算平面，有着均匀的$\Delta \xi$和均匀的$\Delta \eta$，如图5-2b所示。流场变量的计算是在计算平面的所有网格点（如图5-2b中的点a、b和c）上进行的。这些流场变量也就是物理平面相应的网格点（图5-2a中的点a、b和c）上的流场变量。</p>
+
+<h1 id="5-3-度量和雅可比行列式">5.3 度量和雅可比行列式</h1>
+
+<ul>
+<li>式(5-2~15)涉及网格几何性质的项, 如$\frac{\partial \xi}{\partial x}$, $\frac{\partial \xi}{\partial y}$,$\frac{\partial \eta}{\partial x}$, $\frac{\partial \eta}{\partial y}$, 称为度量.</li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>直接变换</th>
+<th>逆变换</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>自变量</td>
+<td>$\xi, \eta, \tau$</td>
+<td>$x, y, t$</td>
+</tr>
+
+<tr>
+<td>变换</td>
+<td>(5-1)直接变换: $\begin{aligned} \xi &amp;= \xi (x, y, t) \\ \eta &amp; = \eta (x, y, t) \\ \tau &amp;= \tau (t) \end{aligned}$</td>
+<td>(5-18)逆变换: $\begin{aligned} x &amp;=x(\xi, \eta, \tau) \\ y &amp;=y(\xi, \eta, \tau) \\ t &amp;=t(\tau) \end{aligned}$</td>
+</tr>
+
+<tr>
+<td>度量</td>
+<td>直接度量: $\frac{\partial \xi}{\partial x}$, $\frac{\partial \xi}{\partial y}$,$\frac{\partial \eta}{\partial x}$, $\frac{\partial \eta}{\partial y}$</td>
+<td>逆度量:$\frac{\partial x}{\partial \xi},\frac{\partial x}{\partial \eta}, \frac{\partial y}{\partial \xi},\frac{\partial y}{\partial \eta}$</td>
+</tr>
+
+<tr>
+<td>二维</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>变换</td>
+<td>直接变换: $\begin{aligned}\xi &amp;= \xi (x,y) \\ \eta &amp;= \eta (x, y) \end{aligned}$</td>
+<td>逆变换:$\begin{aligned} x &amp;= x (\xi,\eta) \\ y &amp;= y (\xi, \eta) \end{aligned}$</td>
+</tr>
+
+<tr>
+<td>全微分</td>
+<td>$\begin{aligned} \mathrm{d} \xi &amp;=\frac{\partial \xi}{\partial x} \mathrm{d} x+\frac{\partial \xi}{\partial y} \mathrm{d} y \\ \mathrm{d} \eta &amp;=\frac{\partial \eta}{\partial x} \mathrm{d} x+\frac{\partial \eta}{\partial y} \mathrm{d} y \end{aligned}$</td>
+<td>$\begin{aligned} \mathrm{d} x &amp;=\frac{\partial x}{\partial \xi} \mathrm{d} \xi+\frac{\partial x}{\partial \eta} \mathrm{d} \eta \\ \mathrm{d} y &amp;=\frac{\partial y}{\partial \xi} \mathrm{d} \xi+\frac{\partial y}{\partial \eta} \mathrm{d} \eta \end{aligned}$</td>
+</tr>
+
+<tr>
+<td>全微分矩阵形式</td>
+<td>(5-27): $\left[\begin{array}{c}{\mathrm{d} \xi} \\ {\mathrm{d} \eta}\end{array}\right]=\left(\begin{array}{cc}{\frac{\partial \xi}{\partial x}} &amp; {\frac{\partial \xi}{\partial y}} \\ {\frac{\partial \eta}{\partial x}} &amp; {\frac{\partial \eta}{\partial y}}\end{array}\right)\left[\begin{array}{l}{\mathrm{d} x} \\ {\mathrm{d} y}\end{array}\right]$</td>
+<td>(5-30): $\left[\begin{array}{c}{\mathrm{d} x} \\ {\mathrm{d} y}\end{array}\right]=\left(\begin{array}{cc}{\frac{\partial x}{\partial \xi}} &amp; {\frac{\partial x}{\partial \eta}} \\ {\frac{\partial \gamma}{\partial \xi}} &amp; {\frac{\partial y}{\partial \eta}}\end{array}\right)\left[\begin{array}{l}{\mathrm{d} \xi} \\ {\mathrm{d} \eta}\end{array}\right]$</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>(5-30)变换后可得(5-31):
+$$\left[\begin{array}{l}{\mathrm{d} \xi} \\ {\mathrm{d} \eta}\end{array}\right]=\left(\begin{array}{cc}{\frac{\partial x}{\partial \xi}} &amp; {\frac{\partial x}{\partial \eta}} \\ {\frac{\partial \gamma}{\partial \xi}} &amp; {\frac{\partial y}{\partial \eta}}\end{array}\right)^{-1}\left[\begin{array}{c}{\mathrm{d} x} \\ {\mathrm{d} y}\end{array}\right]$$</li>
+
+<li><p>比较(5-27)与(5-31), 得(5-32):
+$$\left(\begin{array}{cc}{\frac{\partial \xi}{\partial x}} &amp; {\frac{\partial \xi}{\partial y}} \\ {\frac{\partial \eta}{\partial x}} &amp; {\frac{\partial \eta}{\partial y}}\end{array}\right)=\left(\begin{array}{cc}{\frac{\partial x}{\partial \xi}} &amp; {\frac{\partial x}{\partial \eta}} \\ {\frac{\partial \gamma}{\partial \xi}} &amp; {\frac{\partial y}{\partial \eta}}\end{array}\right)^{-1} \tag{5-32}$$</p></li>
+
+<li><p>有些显而易见的事还是值得说一下。如果看到用变换后的坐标系表示的流动控制方程，其中出现雅可比行列式J，就知道这些方程是在与逆变换和逆度量打交道。如果在变换后的方程中没有看到J，通常就要与前面5.2节定义的直接变换和直接度量打交道。惟一的例外是5.4节将要讨论的内容。</p></li>
+
+<li><p>再一次提醒读者，给定由式（5-1a~c）表示的直接变换，则$\frac{\partial \xi}{\partial x}$、$\frac{\partial \eta}{\partial y}$这样的直接度量最容易从这种变换中求得，并且用式（5-2）、式（5-3）和式（5-5）表示导数的变换也最直接。相反，若给定由式（5-18a~c）表示的逆变换，则$\frac{\partial x}{\partial \xi},\frac{\partial y}{\partial \eta}$这样的逆度量是最容易求的，而用式（5-24a）和式（5-24b）表示导数的变换才是最直接的。</p></li>
+
+<li><p>还要提醒读者，在本章中考虑的是两个空间变量x和y。对于从$(x，y，z)$到$(\xi, \eta, \tau)$的三维空间变换，也有类似的，但更为冗长的表达式。为了清楚地解释基本原理，而不是过多地考虑细节，我们有意识地将讨论局限在二维。</p></li>
+</ul>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/learningnotes/cfd/chapter4/" rel="next">第4章 离散化的基本方法</a>
+  </div>
+  
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Aug 6, 2019</p>
+
+          
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

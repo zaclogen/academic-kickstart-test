@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>前言 | ChuangKit</title>
+    <link>/learningnotes/cfd/</link>
+      <atom:link href="/learningnotes/cfd/index.xml" rel="self" type="application/rss+xml" />
+    <description>前言</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 06 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>前言</title>
+      <link>/learningnotes/cfd/</link>
+    </image>
+    
+    <item>
+      <title>第1章 计算流体力学的基本原理</title>
+      <link>/learningnotes/cfd/chapter1/</link>
+      <pubDate>Sun, 05 May 2019 00:00:00 +0100</pubDate>
+      <guid>/learningnotes/cfd/chapter1/</guid>
+      <description>&lt;p&gt;介绍流体力学的基本原理和概念，推导和讨论流体力学的基本控制方程组。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>第2章 流体力学的控制方程</title>
+      <link>/learningnotes/cfd/chapter2/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0100</pubDate>
+      <guid>/learningnotes/cfd/chapter2/</guid>
+      <description>
+
+&lt;p&gt;本书中最重要的一章，“如果从物理上理解每一个方程(甚至方程中的每一项)的意义，我们又怎么能够指望对数值求解这些方程所得到的CFD结果作出正确的解读呢？”&lt;/p&gt;
+
+&lt;h1 id=&#34;2-1-引言&#34;&gt;2.1 引言&lt;/h1&gt;
+
+&lt;h1 id=&#34;2-2-流动模型&#34;&gt;2.2 流动模型❤️&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;有限控制体
+
+&lt;ul&gt;
+&lt;li&gt;我们不是同时观察整个流场，而是借助控制体，将我们的注意力集中在控制体本身这一有限区域内的流体。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;无穷小流体微团
+
+&lt;ul&gt;
+&lt;li&gt;流体微团无限小的含义与微积分中的无限小的含义相同，但是它又必须足够大，大到包含了大量的流体分子，使它能够被看成是连续介质。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;注释&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;区分守恒与非守恒&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;第三种流动模型，微观处理方法，分子运动论&lt;/p&gt;
+
+&lt;h1 id=&#34;2-3-物质导数-运动流体微团的时间变化率&#34;&gt;2.3 物质导数(运动流体微团的时间变化率)&lt;/h1&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;适用于流体微团的模型&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;描述流体微团在笛卡尔坐标系下的运动&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;物质导数$\text{D} / \text{D}t$物理上表示跟踪一个运动流体微团的时间变化率&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;当地导数$\partial / \partial t$物理上表示固定点处的时间变化率&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;font color = &#34;#dd0000&#34;&gt; 这是红色文字 &lt;/font&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;迁移导数$V\cdot \nabla$: 由于流体微团从流场中一点运动到另一点，流场的空间不均匀性而引起的时间变化率&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;2-4-速度散度及其物理意义&#34;&gt;2.4 速度散度及其物理意义&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;font color = &#34;#dd0000&#34;&gt;速度散度$\nabla \cdot V$: 每单位体积运动着的流体微团，体积相对变化的时间变化率 &lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;模型：&lt;font color = &#34;#0000dd&#34;&gt;随流体运动的控制体，质量固定不随时间变化，密度、体积和控制面随时间改变 &lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;思考：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&#34;center&#34;&gt;
+   &lt;img src=&#34;https://i.imgur.com/xXk9T5r.png&#34; height=&#34;400&#34; &gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;左上：有限控制体模型，控制体内流体质量变化，控制体体积和形状不变，空间位置固定；&lt;/li&gt;
+&lt;li&gt;右上：有限控制体模型，控制体内流体质量不变，控制体体积和形状改变，空间位置随流体运动；&lt;/li&gt;
+&lt;li&gt;左下：无穷小流体微团模型，微团内流体质量变化，微团体积和形状不变，空间位置固定；&lt;/li&gt;
+&lt;li&gt;右下：无穷小流体微团模型，微团内流体质量不变，？？（形状和面积是否可视为不变呢？？），空间位置随流体运动。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;2-5-连续性方程&#34;&gt;2.5 连续性方程&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;物理学原理：质量守恒&lt;/li&gt;
+&lt;li&gt;流动模型：图2-2中四个模型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;2019-8-7&#34;&gt;2019/8/7&lt;/h1&gt;
+
+&lt;div align = &#34;center&#34;&gt;
+&lt;img src=&#34;https://i.imgur.com/fTZAA7X.png&#34; height = &#34;400&#34;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&#34;1-空间位置固定的有限控制体模型&#34;&gt;1 空间位置固定的有限控制体模型&lt;/h2&gt;
+
+&lt;p&gt;通过控制面S流出控制体的净质量流量 = 控制体内质量减少的时间变化率&lt;/p&gt;
+
+&lt;p&gt;$$\frac{\partial}{\partial t} \iiint&lt;em&gt;{\mathscr{V}} \rho \mathrm{d} \mathscr{V}+\iint&lt;/em&gt;{S} \rho V \cdot \mathrm{d} S=0$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;控制体有限的体积就是方程具有积分形式的原因&lt;/li&gt;
+&lt;li&gt;控制体空间位置固定决定了守恒形式&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;2-随流体运动的有限控制体模型&#34;&gt;2 随流体运动的有限控制体模型&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;控制体有限的体积 =&amp;gt; 积分形式&lt;/li&gt;
+&lt;li&gt;控制体随流体运动 =&amp;gt; 非守恒形式&lt;/li&gt;
+&lt;li&gt;有限控制体由无数个无穷小的流体微团组成，并具有固定不变的总质量，那么&lt;font color=&#34;#dd0000&#34;&gt;这些不变质量总的物质导数等于零&lt;/font&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$\frac{\mathrm{D}}{\mathrm{D} t} \iiint_{\mathscr{V}} \rho \mathrm{d} \mathscr{V}=0$$&lt;/p&gt;
+
+&lt;h2 id=&#34;3-空间位置固定的无穷小微团模型&#34;&gt;3 空间位置固定的无穷小微团模型&lt;/h2&gt;
+
+&lt;div align = &#34;center&#34;&gt;
+&lt;img src=&#34;https://i.imgur.com/TF2Q2d4.png&#34; height=&#34;300&#34;&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;好像大部分教科书，都是根据这个模型推导的方程&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;注意图2-7中，x方向的净流出量为，图上有错误
+$$\left[\rho u+\frac{\partial(\rho u)}{\partial x} \mathrm{d} x\right] \mathrm{d} y \mathrm{d} z-(\rho u) \mathrm{d} y \mathrm{d} z=\frac{\partial(\rho u)}{\partial x} \mathrm{d} x \mathrm{d} y \mathrm{d} z$$&lt;/li&gt;
+&lt;li&gt;y方向的净流出量为：
+$$\left[\rho v+\frac{\partial(\rho v)}{\partial y} \mathrm{d} y\right] \mathrm{d} x \mathrm{d} z-(\rho v) \mathrm{d} x \mathrm{d} z=\frac{\partial(\rho v)}{\partial y} \mathrm{d} x \mathrm{d} y \mathrm{d} z$$&lt;/li&gt;
+&lt;li&gt;z方向的净流出量为：
+$$\left[\rho w+\frac{\partial(\rho w)}{\partial z} \mathrm{d} z\right] \mathrm{d} x \mathrm{d} y-(\rho w) \mathrm{d} x \mathrm{d} y=\frac{\partial(\rho w)}{\partial z} \mathrm{d} x \mathrm{d} y \mathrm{d} z$$&lt;/li&gt;
+&lt;li&gt;守恒方程为：
+$$\frac{\partial \rho}{\partial t}+\left[\frac{\partial(\rho u)}{\partial x}+\frac{\partial(\rho v)}{\partial y}+\frac{\partial(\rho w)}{\partial z}\right]=0$$
+或(偏微分形式)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$\frac{\partial \rho}{\partial t}+\nabla \cdot(\rho V)=0$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;微团的无穷小 =&amp;gt; 偏微分形式&lt;/li&gt;
+&lt;li&gt;微团空间位置固定 =&amp;gt; 守恒形式&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;总结&lt;/strong&gt;：&lt;font color=&#34;#dd0000&#34;&gt;由空间位置固定的流动模型直接导出的控制方程定义为守恒型方程&lt;/font&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;4-随流体运动的无穷小微团模型&#34;&gt;4 随流体运动的无穷小微团模型&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;流体微团模型，这个流体微团有固定的质量，但它的形状和体积会在它向下游运动时变化&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$\frac{\mathrm{D}(\rho \delta \mathscr{V})}{\mathrm{D} t}=\delta \mathscr{V} \frac{\mathrm{D} \rho}{\mathrm{D} t}+\rho \frac{\mathrm{D}(\delta \mathscr{V})}{\mathrm{D} t}=0$$&lt;/p&gt;
+
+&lt;p&gt;(*全导数分部展开)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;或&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;$$\frac{\mathrm{D} \rho}{\mathrm{D} t}+\rho\left[\frac{1}{\delta \mathscr{V}} \frac{\mathrm{D}(\delta \mathscr{V})}{\mathrm{D} t}\right]=0$$&lt;/p&gt;
+
+&lt;p&gt;其中方括号内为&lt;strong&gt;体积相对变化的时间变化率&lt;/strong&gt;, 即&lt;strong&gt;速度散度&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;$$\frac{\mathrm{D} \rho}{\mathrm{D} t}+\rho \nabla \cdot V=0$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;微团的无穷小 =&amp;gt; 偏微分形式&lt;/li&gt;
+&lt;li&gt;微团随流体运动 =&amp;gt; 非守恒形式&lt;/li&gt;
+&lt;li&gt;总结：由随流体运动的流动模型直接导出的控制方程定义为&lt;strong&gt;非守恒型方程&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+&lt;li&gt;方程不同形式之间的转化&lt;/li&gt;
+&lt;li&gt;上述四个方程是同一个方程(连续性方程)的四种不同形式&lt;/li&gt;
+&lt;li&gt;守恒形式下，积分 =&amp;gt; 微分 使用散度定理(高斯定理)&lt;/li&gt;
+&lt;li&gt;微分形式下，守恒 =&amp;gt; 非守恒 使用物质导数(输运方程)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;$$\nabla \cdot(\rho \boldsymbol{V}) \equiv(\rho \nabla \cdot \boldsymbol{V})+\left(\boldsymbol{V} \cdot \nabla_{\boldsymbol{\rho}}\right)$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;体积分的积分限由同样的运动微团确定，所以物质导数可以写到积分号之内&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$\frac{\mathrm{D}}{\mathrm{D} t} \iiint&lt;em&gt;{\mathscr{V}} \rho \mathrm{d} \mathscr{V}=\iiint&lt;/em&gt;{\mathscr{V}} \frac{{\mathrm{D}} (\rho \mathrm{d}\mathscr{V})} {\mathrm{D} t} = 0$$&lt;/p&gt;
+
+&lt;p&gt;$\mathrm{d} \mathscr{V}$在物理上代表一个自身可变的无穷小控制体，$\rho$和$\mathrm{d} \mathscr{V}$乘积的物质导数为：&lt;/p&gt;
+
+&lt;p&gt;$$\iiint&lt;em&gt;{\mathscr{V}} \frac{{\mathrm{D}} \rho } {\mathrm{D} t} \mathrm{d}\mathscr{V} + \iiint&lt;/em&gt;{\mathscr{V}} \rho \frac{\mathrm{D}(\mathrm{d}\mathscr{V})}{\mathrm{D} t}= 0$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;变换可得到速度的散度：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$\iiint&lt;em&gt;{\mathscr{V}} \frac{{\mathrm{D}} \rho } {\mathrm{D} t} \mathrm{d}\mathscr{V} + \iiint&lt;/em&gt;{\mathscr{V}} \rho \left [\frac{1}{\mathrm{d} \mathscr{V}}\frac{\mathrm{D}(\mathrm{d}\mathscr{V})}{\mathrm{D} t}\right ] \mathrm{d}\mathscr{V}= 0$$&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;积分形式与微分形式的重要注释&lt;/li&gt;
+&lt;li&gt;实质区别：
+
+&lt;ul&gt;
+&lt;li&gt;积分形式允许在（空间位置）固定的控制体内出现间断&lt;/li&gt;
+&lt;li&gt;微分形式的控制方程假定流动参数是可微的，从而必须是连续的&lt;/li&gt;
+&lt;li&gt;积分 =&amp;gt; 微分 运用了散度定理，散度定理要求数学上的连续性&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;积分形式方程更基础更重要。在流动包含真实的间断（如激波）时，这一点尤其重要&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&#34;2019-8-8&#34;&gt;2019/8/8&lt;/h1&gt;
+
+&lt;h1 id=&#34;2-6-动量方程&#34;&gt;2.6 动量方程&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;物理学原理 牛顿第二定律$F = m a$&lt;/li&gt;
+&lt;li&gt;流动模型  2-2b运动流体微团模型(与连续性方程不同，推导动量方程较复杂), 因为该模型推导动量方程和能量方程尤其方便&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div align=&#34;center&#34;&gt;
+&lt;img src=&#34;https://i.imgur.com/EIMmO3j.png&#34; height=&#34;200&#34;&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;作用与微团上力的总和 = 微团的质量乘以微团运动时的加速度
+
+&lt;ul&gt;
+&lt;li&gt;体积力：直接作用在流体微团的整个体积微元上的力，而且作用是超距离的，如重力、电磁力、磁场力&lt;/li&gt;
+&lt;li&gt;表面力：直接作用在流体微团的表面。只能由两种原因引起：&lt;/li&gt;
+&lt;li&gt;1. 由包在流体微团周围的流体所施加的，作用于微团表面的&lt;strong&gt;压力分布&lt;/strong&gt;；&lt;/li&gt;
+&lt;li&gt;2. 由于外部流体推拉微团而产生的，以摩擦的方式作用于表面的&lt;strong&gt;切应力和正应力分布&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;2019-8-9&#34;&gt;2019/8/9&lt;/h1&gt;
+
+&lt;p&gt;上午快速阅读完成第二章流体力学控制方程，回头还要详细阅读做笔记
+下午打算读一个小时的书
+下午没看多少，在鼓捣pdf转html的事，还搞了下vim_ahk上面的快捷键&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>第3章 偏微分方程的数学性质对CFD的影响</title>
+      <link>/learningnotes/cfd/chapter3/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0100</pubDate>
+      <guid>/learningnotes/cfd/chapter3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>第4章 离散化的基本方法</title>
+      <link>/learningnotes/cfd/chapter4/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0100</pubDate>
+      <guid>/learningnotes/cfd/chapter4/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>第5章 网格生成与坐标变换</title>
+      <link>/learningnotes/cfd/chapter5/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0100</pubDate>
+      <guid>/learningnotes/cfd/chapter5/</guid>
+      <description>
+
+&lt;h1 id=&#34;5-1-引言&#34;&gt;5.1 引言&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;网格: 分布在整个流场内的离散点&lt;/li&gt;
+&lt;li&gt;标准的有限差分法需要均匀网格&lt;/li&gt;
+&lt;li&gt;贴体坐标系$\xi$和$\eta$(在物体表面生成坐标线)&lt;/li&gt;
+&lt;li&gt;&lt;img src=&#34;https://i.imgur.com/V7loUPI.png&#34; alt=&#34;物理平面与计算平面&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;流动控制方程在计算平面里用有限差分方法求解, 计算得到的信息将利用网格点之间的一一对应直接带回到物理平面. 因此需将物理平面的控制方程变换到计算平面表示的物理方程.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;5-2-方程的一般变换&#34;&gt;5.2 方程的一般变换&lt;/h1&gt;
+
+&lt;p&gt;考虑二维非定常流场, 自变量为$x, y, t$, 将物理平面自变量$(x,y,t)$变换成计算平面中的一组新自变量$(\xi, \eta, \tau)$,用下述三个方程表示这个变换:&lt;/p&gt;
+
+&lt;p&gt;$$\xi = \xi (x, y, t)$$
+$$\eta = \eta (x, y, t)$$
+$$\tau = \tau (t)$$
+注: 目前这个变换是以一般形式写出的, 对于实际应用, 该变换必须由具体的解析关系式给出, 有时也可以由特定的数值对应关系式给出.通常$\tau = t$.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;考虑以x, y和t为自变量的一个或一组偏微分方程, 如连续性方程,动量方程和能量方程. 这些方程中&lt;strong&gt;未知数是以导数形式出现的&lt;/strong&gt;, 如$\frac{\partial \rho}{\partial x}$, $\frac{\partial u}{\partial y}$, $\frac{\partial e}{\partial t}$等.&lt;/li&gt;
+&lt;li&gt;因此, 要将方程由$(x, y, t)$空间变换到$(\xi, \eta, \tau)$空间,需要对导数进行变换, 即把关于x, y, t的导数变换成关于$\xi, \eta, \tau$的导数. 比如用$\frac{\partial u}{\partial \xi}$和$\frac{\partial u}{\partial \eta}$等的某种组合来代替$\frac{\partial u}{\partial y}$.&lt;/li&gt;
+&lt;li&gt;根据&lt;strong&gt;求导链式法则&lt;/strong&gt;&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E9%93%BE%E5%BC%8F%E6%B3%95%E5%88%99&#34; target=&#34;_blank&#34;&gt;wiki链式法则&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$\left(\frac{\partial}{\partial x}\right)&lt;em&gt;{y, t}=\left(\frac{\partial}{\partial \xi}\right)&lt;/em&gt;{\eta, \tau}\left(\frac{\partial \xi}{\partial x}\right)&lt;em&gt;{y, t}+\left(\frac{\partial}{\partial \eta}\right)&lt;/em&gt;{\xi, \tau}\left(\frac{\partial \eta}{\partial x}\right)&lt;em&gt;{y, t}+\left(\frac{\partial}{\partial \tau}\right)&lt;/em&gt;{\xi, \eta}\left(\frac{\partial \tau}{\partial x}\right)_{y, t}$$&lt;/p&gt;
+
+&lt;p&gt;$$\left(\frac{\partial}{\partial x}\right)&lt;em&gt;{y, t}=\left(\frac{\partial}{\partial \xi}\right)&lt;/em&gt;{\eta, \tau}\left(\frac{\partial \xi}{\partial x}\right)&lt;em&gt;{y, t}+\left(\frac{\partial}{\partial \eta}\right)&lt;/em&gt;{\xi, \tau}\left(\frac{\partial \eta}{\partial x}\right)&lt;em&gt;{y, t}+\left(\frac{\partial}{\partial \tau}\right)&lt;/em&gt;{\xi, \eta}\left(\frac{\partial \tau}{\partial x}\right)&lt;em&gt;{y, t}$$
+$$\left(\frac{\partial}{\partial t}\right)&lt;/em&gt;{x, y}=\left(\frac{\partial}{\partial \xi}\right)&lt;em&gt;{\eta, \tau}\left(\frac{\partial \xi}{\partial t}\right)&lt;/em&gt;{x, y}+\left(\frac{\partial}{\partial \eta}\right)&lt;em&gt;{\xi, \tau}\left(\frac{\partial \eta}{\partial t}\right)&lt;/em&gt;{x, y}+\left(\frac{\partial}{\partial \tau}\right)&lt;em&gt;{\xi, \eta}\left(\frac{\partial \tau}{\partial t}\right)&lt;/em&gt;{x, y}$$
+注: 表达式中下标是为了强调求偏导数的过程中哪些变量保持不变.
+考虑$\tau = \tau(t)$, 得到(5-2~4):&lt;/p&gt;
+
+&lt;p&gt;$$\frac{\partial}{\partial x}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial x}\right)$$
+$$\frac{\partial}{\partial y}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial y}\right)$$
+$$\frac{\partial}{\partial t}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial t}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial t}\right)+\left(\frac{\partial}{\partial \tau}\right)\left(\frac{\mathrm{d} \tau}{\mathrm{d} t}\right)$$
+- 可将流动控制方程中关于x, y, t的导数对应代替. 关于$\xi, \eta, \tau$的导数中的系数称为&lt;strong&gt;度量&lt;/strong&gt;, 如$\frac{\partial \xi}{\partial x}$, $\frac{\partial \xi}{\partial y}$, $\frac{\partial \eta}{\partial x}$和$\frac{\partial \eta}{\partial y}$都是度量, 如果(5-1)是封闭形式的解析表达式, 那么度量也可以求出封闭形式的表达式.然而, (5-1)给出的变换常常只是纯数值的对应关系, 此时只能用有限差分来计算度量, 通常是用中心差分计算.
+- 考虑粘性流动控制方程, 方程的粘性项包含二阶导数, 如$\frac{\mu \frac{\partial v}{\partial x}}{\partial x}$, 因此对二阶导数也要进行变换.
+- 令 :&lt;/p&gt;
+
+&lt;p&gt;$$A = \frac{\partial}{\partial x}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial x}\right)$$
+$$D=\frac{\partial}{\partial y}=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial y}\right)$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;则有:&lt;/li&gt;
+&lt;li&gt;(5-6)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$\begin{aligned} \frac{\partial^{2}}{\partial x^{2}} &amp;amp;=\frac{\partial A}{\partial x}=\frac{\partial}{\partial x}\left[\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial x}\right)\right] \\ &amp;amp;=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial x^{2}}\right)+\left(\frac{\partial \xi}{\partial x}\right)\left(\frac{\partial^{2}}{\partial x \partial \xi}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial x^{2}}\right)+\left(\frac{\partial \eta}{\partial x}\right)\left(\frac{\partial^{2}}{\partial x \partial \eta}\right) \end{aligned}$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;(5-10)&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$
+\begin{aligned} \frac{\partial^{2}}{\partial y^{2}} &amp;amp;=\frac{\partial D}{\partial y}=\frac{\partial}{\partial y}\left[\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial y}\right)\right] \\ &amp;amp;=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial y^{2}}\right)+\left(\frac{\partial \xi}{\partial y}\right)\left(\frac{\partial^{2}}{\partial \xi \partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial y^{2}}\right)+\left(\frac{\partial \eta}{\partial y}\right)\left(\frac{\partial^{2}}{\partial \eta \partial y}\right) \end{aligned}
+$$
+- (5-14)&lt;/p&gt;
+
+&lt;p&gt;$$
+\begin{aligned} \frac{\partial^{2}}{\partial x \partial y} &amp;amp;=\frac{\partial}{\partial x}\left(\frac{\partial}{\partial y}\right)=\frac{\partial D}{\partial x}=\frac{\partial}{\partial x}\left[\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial \eta}{\partial y}\right)\right] \\ &amp;amp;=\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial x \partial y}\right)+\left(\frac{\partial \xi}{\partial y}\right)\left(\frac{\partial^{2}}{\partial \xi \partial x}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial x \partial y}\right)+\left(\frac{\partial \eta}{\partial y}\right)\left(\frac{\partial^{2}}{\partial \eta \partial x}\right) \end{aligned}
+$$
+- 含有&amp;rdquo;复合导数&amp;rdquo;, 继续运用(5-2~3)&amp;ldquo;锁链规则&amp;rdquo;, 记&amp;rdquo;复合导数&amp;rdquo;为:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;(5-7)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$B=\frac{\partial^{2}}{\partial x \partial \xi}=\frac{\partial}{\partial x}\left(\frac{\partial}{\partial \xi}\right)= \left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \eta}{\partial x}\right)$$
+  - (5-8)&lt;/p&gt;
+
+&lt;p&gt;$$
+C=\frac{\partial^{2}}{\partial x \partial \eta}=\frac{\partial}{\partial x}\left(\frac{\partial}{\partial \eta}\right)=\left(\frac{\partial^{2}}{\partial \xi \partial \eta}\right)\left(\frac{\partial \xi}{\partial x}\right)+\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial x}\right)
+$$
+- (5-11)&lt;/p&gt;
+
+&lt;p&gt;$$
+E=\frac{\partial}{\partial y}\left(\frac{\partial}{\partial \xi}\right)=\left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \eta}{\partial y}\right)
+$$
+  - (5-12)&lt;/p&gt;
+
+&lt;p&gt;$$
+F=\frac{\partial}{\partial y}\left(\frac{\partial}{\partial \eta}\right)=\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial y}\right)
+$$
+- 将B,C,E,F代回, 得二阶导数变换:
+- (5-9)&lt;/p&gt;
+
+&lt;p&gt;$$
+\begin{aligned} \frac{\partial^{2}}{\partial x^{2}}=&amp;amp;\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial x^{2}}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial x^{2}}\right)+\left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial x}\right)^{2}+\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial x}\right)^{2}+\\ &amp;amp; 2\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \eta}{\partial x}\right)\left(\frac{\partial \xi}{\partial x}\right) \end{aligned}
+$$
+- (5-13)&lt;/p&gt;
+
+&lt;p&gt;$$
+\begin{aligned} \frac{\partial^{2}}{\partial y^{2}}=&amp;amp;\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial y^{2}}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial y^{2}}\right)+\left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial y}\right)^{2}+\\ &amp;amp;\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial y}\right)^{2}+2\left(\frac{\partial^{2}}{\partial \eta \partial \xi}\right)\left(\frac{\partial \eta}{\partial y}\right)\left(\frac{\partial \xi}{\partial y}\right) \end{aligned}
+$$
+- (5-15)&lt;/p&gt;
+
+&lt;p&gt;$$
+\begin{aligned} \frac{\partial^{2}}{\partial x \partial y}=&amp;amp;\left(\frac{\partial}{\partial \xi}\right)\left(\frac{\partial^{2} \xi}{\partial x \partial y}\right)+\left(\frac{\partial}{\partial \eta}\right)\left(\frac{\partial^{2} \eta}{\partial x \partial y}\right)+\left(\frac{\partial^{2}}{\partial \xi^{2}}\right)\left(\frac{\partial \xi}{\partial x}\right)\left(\frac{\partial \xi}{\partial y}\right)+\\ &amp;amp;\left(\frac{\partial^{2}}{\partial \eta^{2}}\right)\left(\frac{\partial \eta}{\partial x}\right)\left(\frac{\partial \eta}{\partial y}\right)+\left(\frac{\partial^{2}}{\partial \xi \partial \eta}\right)\left[\left(\frac{\partial \eta}{\partial x}\right)\left(\frac{\partial \xi}{\partial y}\right)+\left(\frac{\partial \xi}{\partial x}\right)\left(\frac{\partial \eta}{\partial y}\right)\right] \end{aligned}
+$$
+当流动控制方程用强守恒形式（2-93）表示时，二阶导数的变换，即式（5-9）、式（5-13）和式（5-15）各式就用不到了。回到2.10节，看看方程（2-93）以及式中的列向量的定义式（2-94）到式（2-98）。注意到，由式（2-95）到式（2-97）表示的F、G和H中，粘性项直接以$\tau&lt;em&gt;{xx}, \tau&lt;/em&gt;{xy}, k\frac{\partial T}{\partial x}$等形式出现。这些项只包括速度分量的一阶导数（如$\frac{\partial u}{\partial x}, \frac{\partial u}{\partial y}$）或温度的一阶导数。对F,G和H内部的这些项进行变换时，只需用到一阶导数的变换式（5-2）和式（5-3）。接下来，方程（2-93）本身出现的一阶导数也是通过式（5-2）、式（5-3）、式（5-5）各式进行变换的。因此，当流动控制方程用式（2-93）的形式表示时，两次运用一阶导数的变换，也就是两次使用式（5-2）、式（5-3）和式（5-5），就可以完成方程的变换。相比之下，用式（2-58a~c）表示的控制方程，粘性项里直接出现了二阶导数。对于这种形式的控制方程进行变换，即要用到式（5-2）、式（5-3）、式（5-5）等一阶导数的变换，也要用到式（5-9）、式（5-13）、式（5-15）等二阶导数的变换。
+再次强调，式（5-1）到式（5-3）、式（5-5）、式（5-9）、式（5-13）和式（5-15）各式，是用来将流动控制方程从物理平面（$（x，y）$平面）变换到计算平面$(\xi, \eta)$平面）的。在大多数CFD应用中，这种变换的目的是将物理平面中的非均匀网格（图5-2a）变换成计算平面中的均匀网格（图5-2b）。变换后的偏微分控制方程就在计算平面上进行有限差分离散。而在计算平面，有着均匀的$\Delta \xi$和均匀的$\Delta \eta$，如图5-2b所示。流场变量的计算是在计算平面的所有网格点（如图5-2b中的点a、b和c）上进行的。这些流场变量也就是物理平面相应的网格点（图5-2a中的点a、b和c）上的流场变量。&lt;/p&gt;
+
+&lt;h1 id=&#34;5-3-度量和雅可比行列式&#34;&gt;5.3 度量和雅可比行列式&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;式(5-2~15)涉及网格几何性质的项, 如$\frac{\partial \xi}{\partial x}$, $\frac{\partial \xi}{\partial y}$,$\frac{\partial \eta}{\partial x}$, $\frac{\partial \eta}{\partial y}$, 称为度量.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;项目&lt;/th&gt;
+&lt;th&gt;直接变换&lt;/th&gt;
+&lt;th&gt;逆变换&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;自变量&lt;/td&gt;
+&lt;td&gt;$\xi, \eta, \tau$&lt;/td&gt;
+&lt;td&gt;$x, y, t$&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;变换&lt;/td&gt;
+&lt;td&gt;(5-1)直接变换: $\begin{aligned} \xi &amp;amp;= \xi (x, y, t) \\ \eta &amp;amp; = \eta (x, y, t) \\ \tau &amp;amp;= \tau (t) \end{aligned}$&lt;/td&gt;
+&lt;td&gt;(5-18)逆变换: $\begin{aligned} x &amp;amp;=x(\xi, \eta, \tau) \\ y &amp;amp;=y(\xi, \eta, \tau) \\ t &amp;amp;=t(\tau) \end{aligned}$&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;度量&lt;/td&gt;
+&lt;td&gt;直接度量: $\frac{\partial \xi}{\partial x}$, $\frac{\partial \xi}{\partial y}$,$\frac{\partial \eta}{\partial x}$, $\frac{\partial \eta}{\partial y}$&lt;/td&gt;
+&lt;td&gt;逆度量:$\frac{\partial x}{\partial \xi},\frac{\partial x}{\partial \eta}, \frac{\partial y}{\partial \xi},\frac{\partial y}{\partial \eta}$&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;二维&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;变换&lt;/td&gt;
+&lt;td&gt;直接变换: $\begin{aligned}\xi &amp;amp;= \xi (x,y) \\ \eta &amp;amp;= \eta (x, y) \end{aligned}$&lt;/td&gt;
+&lt;td&gt;逆变换:$\begin{aligned} x &amp;amp;= x (\xi,\eta) \\ y &amp;amp;= y (\xi, \eta) \end{aligned}$&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;全微分&lt;/td&gt;
+&lt;td&gt;$\begin{aligned} \mathrm{d} \xi &amp;amp;=\frac{\partial \xi}{\partial x} \mathrm{d} x+\frac{\partial \xi}{\partial y} \mathrm{d} y \\ \mathrm{d} \eta &amp;amp;=\frac{\partial \eta}{\partial x} \mathrm{d} x+\frac{\partial \eta}{\partial y} \mathrm{d} y \end{aligned}$&lt;/td&gt;
+&lt;td&gt;$\begin{aligned} \mathrm{d} x &amp;amp;=\frac{\partial x}{\partial \xi} \mathrm{d} \xi+\frac{\partial x}{\partial \eta} \mathrm{d} \eta \\ \mathrm{d} y &amp;amp;=\frac{\partial y}{\partial \xi} \mathrm{d} \xi+\frac{\partial y}{\partial \eta} \mathrm{d} \eta \end{aligned}$&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td&gt;全微分矩阵形式&lt;/td&gt;
+&lt;td&gt;(5-27): $\left[\begin{array}{c}{\mathrm{d} \xi} \\ {\mathrm{d} \eta}\end{array}\right]=\left(\begin{array}{cc}{\frac{\partial \xi}{\partial x}} &amp;amp; {\frac{\partial \xi}{\partial y}} \\ {\frac{\partial \eta}{\partial x}} &amp;amp; {\frac{\partial \eta}{\partial y}}\end{array}\right)\left[\begin{array}{l}{\mathrm{d} x} \\ {\mathrm{d} y}\end{array}\right]$&lt;/td&gt;
+&lt;td&gt;(5-30): $\left[\begin{array}{c}{\mathrm{d} x} \\ {\mathrm{d} y}\end{array}\right]=\left(\begin{array}{cc}{\frac{\partial x}{\partial \xi}} &amp;amp; {\frac{\partial x}{\partial \eta}} \\ {\frac{\partial \gamma}{\partial \xi}} &amp;amp; {\frac{\partial y}{\partial \eta}}\end{array}\right)\left[\begin{array}{l}{\mathrm{d} \xi} \\ {\mathrm{d} \eta}\end{array}\right]$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+&lt;li&gt;(5-30)变换后可得(5-31):
+$$\left[\begin{array}{l}{\mathrm{d} \xi} \\ {\mathrm{d} \eta}\end{array}\right]=\left(\begin{array}{cc}{\frac{\partial x}{\partial \xi}} &amp;amp; {\frac{\partial x}{\partial \eta}} \\ {\frac{\partial \gamma}{\partial \xi}} &amp;amp; {\frac{\partial y}{\partial \eta}}\end{array}\right)^{-1}\left[\begin{array}{c}{\mathrm{d} x} \\ {\mathrm{d} y}\end{array}\right]$$&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;比较(5-27)与(5-31), 得(5-32):
+$$\left(\begin{array}{cc}{\frac{\partial \xi}{\partial x}} &amp;amp; {\frac{\partial \xi}{\partial y}} \\ {\frac{\partial \eta}{\partial x}} &amp;amp; {\frac{\partial \eta}{\partial y}}\end{array}\right)=\left(\begin{array}{cc}{\frac{\partial x}{\partial \xi}} &amp;amp; {\frac{\partial x}{\partial \eta}} \\ {\frac{\partial \gamma}{\partial \xi}} &amp;amp; {\frac{\partial y}{\partial \eta}}\end{array}\right)^{-1} \tag{5-32}$$&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;有些显而易见的事还是值得说一下。如果看到用变换后的坐标系表示的流动控制方程，其中出现雅可比行列式J，就知道这些方程是在与逆变换和逆度量打交道。如果在变换后的方程中没有看到J，通常就要与前面5.2节定义的直接变换和直接度量打交道。惟一的例外是5.4节将要讨论的内容。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;再一次提醒读者，给定由式（5-1a~c）表示的直接变换，则$\frac{\partial \xi}{\partial x}$、$\frac{\partial \eta}{\partial y}$这样的直接度量最容易从这种变换中求得，并且用式（5-2）、式（5-3）和式（5-5）表示导数的变换也最直接。相反，若给定由式（5-18a~c）表示的逆变换，则$\frac{\partial x}{\partial \xi},\frac{\partial y}{\partial \eta}$这样的逆度量是最容易求的，而用式（5-24a）和式（5-24b）表示导数的变换才是最直接的。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;还要提醒读者，在本章中考虑的是两个空间变量x和y。对于从$(x，y，z)$到$(\xi, \eta, \tau)$的三维空间变换，也有类似的，但更为冗长的表达式。为了清楚地解释基本原理，而不是过多地考虑细节，我们有意识地将讨论局限在二维。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

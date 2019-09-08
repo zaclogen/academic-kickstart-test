@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.4.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="ChuangKit">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="本书中最重要的一章，“如果从物理上理解每一个方程(甚至方程中的每一项)的意义，我们又怎么能够指望对数值求解这些方程所得到的CFD结果作出正确的解读呢？”
+2.1 引言 2.2 流动模型❤️  有限控制体  我们不是同时观察整个流场，而是借助控制体，将我们的注意力集中在控制体本身这一有限区域内的流体。  无穷小流体微团  流体微团无限小的含义与微积分中的无限小的含义相同，但是它又必须足够大，大到包含了大量的流体分子，使它能够被看成是连续介质。  注释
+ 区分守恒与非守恒 第三种流动模型，微观处理方法，分子运动论
+2.3 物质导数(运动流体微团的时间变化率) 适用于流体微团的模型
+ 描述流体微团在笛卡尔坐标系下的运动
+ 物质导数$\text{D} / \text{D}t$物理上表示跟踪一个运动流体微团的时间变化率
+ 当地导数$\partial / \partial t$物理上表示固定点处的时间变化率
+ 这是红色文字 
+ 迁移导数$V\cdot \nabla$: 由于流体微团从流场中一点运动到另一点，流场的空间不均匀性而引起的时间变化率
+   2.4 速度散度及其物理意义  速度散度$\nabla \cdot V$: 每单位体积运动着的流体微团，体积相对变化的时间变化率  模型：随流体运动的控制体，质量固定不随时间变化，密度、体积和控制面随时间改变  思考：    左上：有限控制体模型，控制体内流体质量变化，控制体体积和形状不变，空间位置固定； 右上：有限控制体模型，控制体内流体质量不变，控制体体积和形状改变，空间位置随流体运动； 左下：无穷小流体微团模型，微团内流体质量变化，微团体积和形状不变，空间位置固定； 右下：无穷小流体微团模型，微团内流体质量不变，？？（形状和面积是否可视为不变呢？？），空间位置随流体运动。  2.5 连续性方程  物理学原理：质量守恒 流动模型：图2-2中四个模型  2019/8/7  1 空间位置固定的有限控制体模型 通过控制面S流出控制体的净质量流量 = 控制体内质量减少的时间变化率">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/learningnotes/cfd/chapter2/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#EF525B">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono|Lora:400,700|Roboto:400,700&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.9ae2dcbfaf086b03655442ec6e1550ba.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/learningnotes/cfd/chapter2/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="ChuangKit">
+  <meta property="og:url" content="/learningnotes/cfd/chapter2/">
+  <meta property="og:title" content="第2章 流体力学的控制方程 | ChuangKit">
+  <meta property="og:description" content="本书中最重要的一章，“如果从物理上理解每一个方程(甚至方程中的每一项)的意义，我们又怎么能够指望对数值求解这些方程所得到的CFD结果作出正确的解读呢？”
+2.1 引言 2.2 流动模型❤️  有限控制体  我们不是同时观察整个流场，而是借助控制体，将我们的注意力集中在控制体本身这一有限区域内的流体。  无穷小流体微团  流体微团无限小的含义与微积分中的无限小的含义相同，但是它又必须足够大，大到包含了大量的流体分子，使它能够被看成是连续介质。  注释
+ 区分守恒与非守恒 第三种流动模型，微观处理方法，分子运动论
+2.3 物质导数(运动流体微团的时间变化率) 适用于流体微团的模型
+ 描述流体微团在笛卡尔坐标系下的运动
+ 物质导数$\text{D} / \text{D}t$物理上表示跟踪一个运动流体微团的时间变化率
+ 当地导数$\partial / \partial t$物理上表示固定点处的时间变化率
+ 这是红色文字 
+ 迁移导数$V\cdot \nabla$: 由于流体微团从流场中一点运动到另一点，流场的空间不均匀性而引起的时间变化率
+   2.4 速度散度及其物理意义  速度散度$\nabla \cdot V$: 每单位体积运动着的流体微团，体积相对变化的时间变化率  模型：随流体运动的控制体，质量固定不随时间变化，密度、体积和控制面随时间改变  思考：    左上：有限控制体模型，控制体内流体质量变化，控制体体积和形状不变，空间位置固定； 右上：有限控制体模型，控制体内流体质量不变，控制体体积和形状改变，空间位置随流体运动； 左下：无穷小流体微团模型，微团内流体质量变化，微团体积和形状不变，空间位置固定； 右下：无穷小流体微团模型，微团内流体质量不变，？？（形状和面积是否可视为不变呢？？），空间位置随流体运动。  2.5 连续性方程  物理学原理：质量守恒 流动模型：图2-2中四个模型  2019/8/7  1 空间位置固定的有限控制体模型 通过控制面S流出控制体的净质量流量 = 控制体内质量减少的时间变化率"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-08-06T00:00:00&#43;01:00">
+    
+    <meta property="article:modified_time" content="2019-08-06T00:00:00&#43;01:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>第2章 流体力学的控制方程 | ChuangKit</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/">ChuangKit</a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav mr-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>主页</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/learningnotes/"><span>学习笔记</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post/"><span>博客</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>项目</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/slides/"><span>幻灯片</span></a>
+        </li>
+
+        
+        
+
+      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/learningnotes/cfd/">前言</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/learningnotes/cfd/chapter1/">卷1 基本思想和方程</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter1/">1 计算流体力学的基本原理</a>
+      </li>
+      
+      <li class="active">
+        <a href="/learningnotes/cfd/chapter2/">2 计算流体力学的控制方程</a>
+      </li>
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter3/">3 偏微分方程的数学性质对CFD的影响</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/learningnotes/cfd/chapter4/">卷2 基本的数值方法</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter4/">4 离散化的基本方法</a>
+      </li>
+      
+      <li >
+        <a href="/learningnotes/cfd/chapter5/">5 网格生成与坐标变换</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+<ul>
+<li><a href="#2-1-引言">2.1 引言</a></li>
+<li><a href="#2-2-流动模型">2.2 流动模型❤️</a></li>
+<li><a href="#2-3-物质导数-运动流体微团的时间变化率">2.3 物质导数(运动流体微团的时间变化率)</a></li>
+<li><a href="#2-4-速度散度及其物理意义">2.4 速度散度及其物理意义</a></li>
+<li><a href="#2-5-连续性方程">2.5 连续性方程</a></li>
+<li><a href="#2019-8-7">2019/8/7</a>
+<ul>
+<li><a href="#1-空间位置固定的有限控制体模型">1 空间位置固定的有限控制体模型</a></li>
+<li><a href="#2-随流体运动的有限控制体模型">2 随流体运动的有限控制体模型</a></li>
+<li><a href="#3-空间位置固定的无穷小微团模型">3 空间位置固定的无穷小微团模型</a></li>
+<li><a href="#4-随流体运动的无穷小微团模型">4 随流体运动的无穷小微团模型</a></li>
+</ul></li>
+<li><a href="#2019-8-8">2019/8/8</a></li>
+<li><a href="#2-6-动量方程">2.6 动量方程</a></li>
+<li><a href="#2019-8-9">2019/8/9</a></li>
+</ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">第2章 流体力学的控制方程</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            
+
+<p>本书中最重要的一章，“如果从物理上理解每一个方程(甚至方程中的每一项)的意义，我们又怎么能够指望对数值求解这些方程所得到的CFD结果作出正确的解读呢？”</p>
+
+<h1 id="2-1-引言">2.1 引言</h1>
+
+<h1 id="2-2-流动模型">2.2 流动模型❤️</h1>
+
+<ol>
+<li>有限控制体
+
+<ul>
+<li>我们不是同时观察整个流场，而是借助控制体，将我们的注意力集中在控制体本身这一有限区域内的流体。</li>
+</ul></li>
+<li>无穷小流体微团
+
+<ul>
+<li>流体微团无限小的含义与微积分中的无限小的含义相同，但是它又必须足够大，大到包含了大量的流体分子，使它能够被看成是连续介质。</li>
+</ul></li>
+
+<li><p>注释</p>
+
+<ul>
+<li>区分守恒与非守恒</li>
+
+<li><p>第三种流动模型，微观处理方法，分子运动论</p>
+
+<h1 id="2-3-物质导数-运动流体微团的时间变化率">2.3 物质导数(运动流体微团的时间变化率)</h1></li>
+
+<li><p>适用于流体微团的模型</p></li>
+
+<li><p>描述流体微团在笛卡尔坐标系下的运动</p></li>
+
+<li><p>物质导数$\text{D} / \text{D}t$物理上表示跟踪一个运动流体微团的时间变化率</p></li>
+
+<li><p>当地导数$\partial / \partial t$物理上表示固定点处的时间变化率</p></li>
+
+<li><p><font color = "#dd0000"> 这是红色文字 </font></p></li>
+
+<li><p>迁移导数$V\cdot \nabla$: 由于流体微团从流场中一点运动到另一点，流场的空间不均匀性而引起的时间变化率</p></li>
+</ul></li>
+</ol>
+
+<h1 id="2-4-速度散度及其物理意义">2.4 速度散度及其物理意义</h1>
+
+<ul>
+<li><font color = "#dd0000">速度散度$\nabla \cdot V$: 每单位体积运动着的流体微团，体积相对变化的时间变化率 </font></li>
+<li>模型：<font color = "#0000dd">随流体运动的控制体，质量固定不随时间变化，密度、体积和控制面随时间改变 </font></li>
+<li>思考：</li>
+</ul>
+
+<div align="center">
+   <img src="https://i.imgur.com/xXk9T5r.png" height="400" >
+</div>
+
+<ul>
+<li>左上：有限控制体模型，控制体内流体质量变化，控制体体积和形状不变，空间位置固定；</li>
+<li>右上：有限控制体模型，控制体内流体质量不变，控制体体积和形状改变，空间位置随流体运动；</li>
+<li>左下：无穷小流体微团模型，微团内流体质量变化，微团体积和形状不变，空间位置固定；</li>
+<li>右下：无穷小流体微团模型，微团内流体质量不变，？？（形状和面积是否可视为不变呢？？），空间位置随流体运动。</li>
+</ul>
+
+<h1 id="2-5-连续性方程">2.5 连续性方程</h1>
+
+<ul>
+<li>物理学原理：质量守恒</li>
+<li>流动模型：图2-2中四个模型</li>
+</ul>
+
+<h1 id="2019-8-7">2019/8/7</h1>
+
+<div align = "center">
+<img src="https://i.imgur.com/fTZAA7X.png" height = "400">
+</div>
+
+<h2 id="1-空间位置固定的有限控制体模型">1 空间位置固定的有限控制体模型</h2>
+
+<p>通过控制面S流出控制体的净质量流量 = 控制体内质量减少的时间变化率</p>
+
+<p>$$\frac{\partial}{\partial t} \iiint<em>{\mathscr{V}} \rho \mathrm{d} \mathscr{V}+\iint</em>{S} \rho V \cdot \mathrm{d} S=0$$</p>
+
+<ul>
+<li>控制体有限的体积就是方程具有积分形式的原因</li>
+<li>控制体空间位置固定决定了守恒形式</li>
+</ul>
+
+<h2 id="2-随流体运动的有限控制体模型">2 随流体运动的有限控制体模型</h2>
+
+<ul>
+<li>控制体有限的体积 =&gt; 积分形式</li>
+<li>控制体随流体运动 =&gt; 非守恒形式</li>
+<li>有限控制体由无数个无穷小的流体微团组成，并具有固定不变的总质量，那么<font color="#dd0000">这些不变质量总的物质导数等于零</font></li>
+</ul>
+
+<p>$$\frac{\mathrm{D}}{\mathrm{D} t} \iiint_{\mathscr{V}} \rho \mathrm{d} \mathscr{V}=0$$</p>
+
+<h2 id="3-空间位置固定的无穷小微团模型">3 空间位置固定的无穷小微团模型</h2>
+
+<div align = "center">
+<img src="https://i.imgur.com/TF2Q2d4.png" height="300">
+</div>
+
+<ul>
+<li><strong>好像大部分教科书，都是根据这个模型推导的方程</strong></li>
+<li>注意图2-7中，x方向的净流出量为，图上有错误
+$$\left[\rho u+\frac{\partial(\rho u)}{\partial x} \mathrm{d} x\right] \mathrm{d} y \mathrm{d} z-(\rho u) \mathrm{d} y \mathrm{d} z=\frac{\partial(\rho u)}{\partial x} \mathrm{d} x \mathrm{d} y \mathrm{d} z$$</li>
+<li>y方向的净流出量为：
+$$\left[\rho v+\frac{\partial(\rho v)}{\partial y} \mathrm{d} y\right] \mathrm{d} x \mathrm{d} z-(\rho v) \mathrm{d} x \mathrm{d} z=\frac{\partial(\rho v)}{\partial y} \mathrm{d} x \mathrm{d} y \mathrm{d} z$$</li>
+<li>z方向的净流出量为：
+$$\left[\rho w+\frac{\partial(\rho w)}{\partial z} \mathrm{d} z\right] \mathrm{d} x \mathrm{d} y-(\rho w) \mathrm{d} x \mathrm{d} y=\frac{\partial(\rho w)}{\partial z} \mathrm{d} x \mathrm{d} y \mathrm{d} z$$</li>
+<li>守恒方程为：
+$$\frac{\partial \rho}{\partial t}+\left[\frac{\partial(\rho u)}{\partial x}+\frac{\partial(\rho v)}{\partial y}+\frac{\partial(\rho w)}{\partial z}\right]=0$$
+或(偏微分形式)</li>
+</ul>
+
+<p>$$\frac{\partial \rho}{\partial t}+\nabla \cdot(\rho V)=0$$</p>
+
+<ul>
+<li>微团的无穷小 =&gt; 偏微分形式</li>
+<li>微团空间位置固定 =&gt; 守恒形式</li>
+<li><strong>总结</strong>：<font color="#dd0000">由空间位置固定的流动模型直接导出的控制方程定义为守恒型方程</font></li>
+</ul>
+
+<h2 id="4-随流体运动的无穷小微团模型">4 随流体运动的无穷小微团模型</h2>
+
+<ul>
+<li>流体微团模型，这个流体微团有固定的质量，但它的形状和体积会在它向下游运动时变化</li>
+</ul>
+
+<p>$$\frac{\mathrm{D}(\rho \delta \mathscr{V})}{\mathrm{D} t}=\delta \mathscr{V} \frac{\mathrm{D} \rho}{\mathrm{D} t}+\rho \frac{\mathrm{D}(\delta \mathscr{V})}{\mathrm{D} t}=0$$</p>
+
+<p>(*全导数分部展开)</p>
+
+<p><strong>或</strong></p>
+
+<p>$$\frac{\mathrm{D} \rho}{\mathrm{D} t}+\rho\left[\frac{1}{\delta \mathscr{V}} \frac{\mathrm{D}(\delta \mathscr{V})}{\mathrm{D} t}\right]=0$$</p>
+
+<p>其中方括号内为<strong>体积相对变化的时间变化率</strong>, 即<strong>速度散度</strong></p>
+
+<p>$$\frac{\mathrm{D} \rho}{\mathrm{D} t}+\rho \nabla \cdot V=0$$</p>
+
+<ul>
+<li>微团的无穷小 =&gt; 偏微分形式</li>
+<li>微团随流体运动 =&gt; 非守恒形式</li>
+<li>总结：由随流体运动的流动模型直接导出的控制方程定义为<strong>非守恒型方程</strong></li>
+</ul>
+
+<ol>
+<li>方程不同形式之间的转化</li>
+<li>上述四个方程是同一个方程(连续性方程)的四种不同形式</li>
+<li>守恒形式下，积分 =&gt; 微分 使用散度定理(高斯定理)</li>
+<li>微分形式下，守恒 =&gt; 非守恒 使用物质导数(输运方程)</li>
+</ol>
+
+<p>$$\nabla \cdot(\rho \boldsymbol{V}) \equiv(\rho \nabla \cdot \boldsymbol{V})+\left(\boldsymbol{V} \cdot \nabla_{\boldsymbol{\rho}}\right)$$</p>
+
+<ul>
+<li>体积分的积分限由同样的运动微团确定，所以物质导数可以写到积分号之内</li>
+</ul>
+
+<p>$$\frac{\mathrm{D}}{\mathrm{D} t} \iiint<em>{\mathscr{V}} \rho \mathrm{d} \mathscr{V}=\iiint</em>{\mathscr{V}} \frac{{\mathrm{D}} (\rho \mathrm{d}\mathscr{V})} {\mathrm{D} t} = 0$$</p>
+
+<p>$\mathrm{d} \mathscr{V}$在物理上代表一个自身可变的无穷小控制体，$\rho$和$\mathrm{d} \mathscr{V}$乘积的物质导数为：</p>
+
+<p>$$\iiint<em>{\mathscr{V}} \frac{{\mathrm{D}} \rho } {\mathrm{D} t} \mathrm{d}\mathscr{V} + \iiint</em>{\mathscr{V}} \rho \frac{\mathrm{D}(\mathrm{d}\mathscr{V})}{\mathrm{D} t}= 0$$</p>
+
+<ul>
+<li>变换可得到速度的散度：</li>
+</ul>
+
+<p>$$\iiint<em>{\mathscr{V}} \frac{{\mathrm{D}} \rho } {\mathrm{D} t} \mathrm{d}\mathscr{V} + \iiint</em>{\mathscr{V}} \rho \left [\frac{1}{\mathrm{d} \mathscr{V}}\frac{\mathrm{D}(\mathrm{d}\mathscr{V})}{\mathrm{D} t}\right ] \mathrm{d}\mathscr{V}= 0$$</p>
+
+<ol>
+<li>积分形式与微分形式的重要注释</li>
+<li>实质区别：
+
+<ul>
+<li>积分形式允许在（空间位置）固定的控制体内出现间断</li>
+<li>微分形式的控制方程假定流动参数是可微的，从而必须是连续的</li>
+<li>积分 =&gt; 微分 运用了散度定理，散度定理要求数学上的连续性</li>
+</ul></li>
+<li>积分形式方程更基础更重要。在流动包含真实的间断（如激波）时，这一点尤其重要</li>
+</ol>
+
+<h1 id="2019-8-8">2019/8/8</h1>
+
+<h1 id="2-6-动量方程">2.6 动量方程</h1>
+
+<ul>
+<li>物理学原理 牛顿第二定律$F = m a$</li>
+<li>流动模型  2-2b运动流体微团模型(与连续性方程不同，推导动量方程较复杂), 因为该模型推导动量方程和能量方程尤其方便</li>
+</ul>
+
+<div align="center">
+<img src="https://i.imgur.com/EIMmO3j.png" height="200">
+</div>
+
+<ul>
+<li>作用与微团上力的总和 = 微团的质量乘以微团运动时的加速度
+
+<ul>
+<li>体积力：直接作用在流体微团的整个体积微元上的力，而且作用是超距离的，如重力、电磁力、磁场力</li>
+<li>表面力：直接作用在流体微团的表面。只能由两种原因引起：</li>
+<li>1. 由包在流体微团周围的流体所施加的，作用于微团表面的<strong>压力分布</strong>；</li>
+<li>2. 由于外部流体推拉微团而产生的，以摩擦的方式作用于表面的<strong>切应力和正应力分布</strong>。</li>
+</ul></li>
+</ul>
+
+<h1 id="2019-8-9">2019/8/9</h1>
+
+<p>上午快速阅读完成第二章流体力学控制方程，回头还要详细阅读做笔记
+下午打算读一个小时的书
+下午没看多少，在鼓捣pdf转html的事，还搞了下vim_ahk上面的快捷键</p>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/learningnotes/cfd/chapter1/" rel="next">第1章 计算流体力学的基本原理</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/learningnotes/cfd/chapter3/" rel="prev">第3章 偏微分方程的数学性质对CFD的影响</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Aug 6, 2019</p>
+
+          
+
+
+          
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.16bbb3750feb7244c9bc409a5a4fe678.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
